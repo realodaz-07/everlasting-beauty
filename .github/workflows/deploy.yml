@@ -1,0 +1,42 @@
+name: Deploy to Cloudflare Pages
+
+# Push to main -> live. No manual wrangler step. Project is direct-upload; this Action is its CI.
+# DORMANT until the CLOUDFLARE_API_TOKEN repo secret is set (reuse the existing craft-agent (full) token; never mint):
+#   gh secret set CLOUDFLARE_API_TOKEN --repo realodaz-07/everlasting-beauty
+on:
+  push:
+    branches: [main]
+    paths-ignore:      # docs/CI-only commits don't affect the site
+      - 'CHANGELOG.md'
+      - 'README.md'
+      - 'VERSION'
+      - 'docs/**'
+      - '.github/**'
+  workflow_dispatch: {}
+
+concurrency:
+  group: pages-deploy
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    steps:
+      - uses: actions/checkout@v4
+
+      # Ship ONLY site assets (allowlist) — index.html + assets/.
+      - name: Assemble deploy dir
+        run: |
+          mkdir dist
+          cp ./*.html dist/
+          cp -r assets dist/
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: 1a27e68352eb5c992f9f46417dc6dc7a
+          command: pages deploy dist --project-name=everlasting-beauty --branch=main --commit-dirty=true
