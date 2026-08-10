@@ -29,6 +29,7 @@
   --shadow-md: 0 18px 50px -22px rgba(28,27,26,.28);
   --shadow-lg: 0 40px 90px -40px rgba(28,27,26,.42);
   --ease: cubic-bezier(.22,.61,.36,1);
+  --header-h: 120px;
 }
 
 * { box-sizing: border-box; }
@@ -112,7 +113,7 @@ h2.display { font-size: clamp(2.1rem, 4.6vw, 3.6rem); }
   background: transparent;
 }
 .site-header.scrolled {
-  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
   backdrop-filter: blur(14px) saturate(1.2);
   -webkit-backdrop-filter: blur(14px) saturate(1.2);
   box-shadow: 0 1px 0 var(--line);
@@ -132,23 +133,51 @@ h2.display { font-size: clamp(2.1rem, 4.6vw, 3.6rem); }
 }
 .nav-links a:hover { color: var(--ink); }
 .nav-links a:hover::after { width: 100%; }
-.brand { display: flex; align-items: center; justify-content: flex-end; }
+.brand { display: flex; align-items: center; justify-content: flex-start; }
 .brand img { height: 52px; width: auto; mix-blend-mode: multiply; }
 .site-header.scrolled .brand img { height: 40px; }
-.brand img { transition: height .4s var(--ease); }
+.brand img { transition: height .4s var(--ease), filter .4s var(--ease); }
 .nav-right { display: flex; align-items: center; justify-content: flex-end; gap: 26px; }
 .site-header .nav-toggle { display: none; }
 
+/* Adaptive header contrast — light over the dark hero at top, dark once scrolled onto light sections */
+.site-header .nav-links a { color: rgba(255,255,255,.86); }
+.site-header .nav-links a:hover { color: #fff; }
+/* Logo is an opaque white-ground raster: over the dark hero show it as a rounded white tile;
+   once scrolled onto light, multiply blends its ground away to sit flush on the header. */
+.site-header .brand img { filter: none; mix-blend-mode: normal; border-radius: 9px; box-shadow: 0 6px 22px rgba(0,0,0,.30); }
+.site-header .nav-toggle { border-color: rgba(255,255,255,.5); color: #fff; }
+.site-header.scrolled .nav-links a { color: var(--ink-2); }
+.site-header.scrolled .nav-links a:hover { color: var(--ink); }
+.site-header.scrolled .brand img { filter: none; mix-blend-mode: multiply; border-radius: 0; box-shadow: none; }
+.site-header.scrolled .nav-toggle { border-color: var(--silver-2); color: var(--ink); }
+
 /* ---------- Hero ---------- */
-.hero { padding: clamp(30px, 6vw, 70px) 0 90px; text-align: center; }
-.hero h1 { font-size: clamp(2.7rem, 7vw, 5.6rem); }
-.hero .lead { margin: 26px auto 34px; text-align: center; }
+.hero {
+  padding: clamp(30px, 6vw, 70px) 0 90px; text-align: center;
+  position: relative; isolation: isolate; color: #fff;
+}
+/* Dark "yellow powder" backdrop — extends up behind the transparent sticky header */
+.hero::before {
+  content: ""; position: absolute; z-index: -1;
+  left: 0; right: 0; bottom: 0; top: calc(-1 * var(--header-h));
+  background:
+    linear-gradient(180deg, rgba(12,11,10,.72) 0%, rgba(12,11,10,.55) 42%, rgba(12,11,10,.78) 100%),
+    url("../img/hero-powder.jpg") center 22% / cover no-repeat;
+  background-color: #0c0b0a;
+}
+/* Lift hero content above ::before (some engines mis-stack a negative-z pseudo vs in-flow content) */
+.hero .wrap { position: relative; z-index: 1; }
+.hero h1 { font-size: clamp(2.7rem, 7vw, 5.6rem); color: #fff; }
+.hero .lead { margin: 26px auto 34px; text-align: center; color: rgba(255,255,255,.9); }
+.hero .btn.ghost { --_fg: #fff; border-color: rgba(255,255,255,.55); }
+.hero .btn.ghost:hover { background: rgba(255,255,255,.12); }
 .hero-cta { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 .hero-trust {
   margin-top: 30px; display: flex; gap: 26px; justify-content: center; flex-wrap: wrap;
-  font-size: .78rem; letter-spacing: .06em; color: var(--muted);
+  font-size: .78rem; letter-spacing: .06em; color: rgba(255,255,255,.8);
 }
-.hero-trust b { color: var(--ink); font-weight: 600; }
+.hero-trust b { color: #fff; font-weight: 600; }
 .hero-trust span { display: inline-flex; align-items: center; gap: 8px; }
 .stars { color: var(--gold-hi); letter-spacing: 2px; }
 
@@ -408,8 +437,6 @@ h2.display { font-size: clamp(2.1rem, 4.6vw, 3.6rem); }
   .nav-links { display: none; }
   .nav-cta { display: none; }
   .site-header .nav-toggle { display: inline-grid; }
-  .nav-right { flex: 1; justify-content: space-between; }
-  .nav-right .brand { order: -1; }
   .feature-grid { grid-template-columns: 1fr; }
   .pricing-panel { grid-template-columns: 1fr; }
   .about-grid { grid-template-columns: 1fr; gap: 40px; }
