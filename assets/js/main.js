@@ -2,14 +2,21 @@
 (function () {
   "use strict";
 
-  /* Sticky header state */
+  /* Sticky header state — hysteresis band (add >56, remove <16) prevents
+     flicker when the scroll position wobbles around a single threshold */
   var header = document.getElementById("header");
+  var ticking = false;
+  var apply = function () {
+    var y = window.scrollY || document.documentElement.scrollTop || 0;
+    if (y > 56) header.classList.add("scrolled");
+    else if (y < 16) header.classList.remove("scrolled");
+    ticking = false;
+  };
   var onScroll = function () {
-    if (window.scrollY > 24) header.classList.add("scrolled");
-    else header.classList.remove("scrolled");
+    if (!ticking) { ticking = true; window.requestAnimationFrame(apply); }
   };
   window.addEventListener("scroll", onScroll, { passive: true });
-  onScroll();
+  apply();
 
   /* Mobile menu */
   var menu = document.getElementById("mobileMenu");

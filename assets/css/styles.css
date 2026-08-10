@@ -143,13 +143,12 @@ h2.display { font-size: clamp(2.1rem, 4.6vw, 3.6rem); }
 /* Adaptive header contrast — light over the dark hero at top, dark once scrolled onto light sections */
 .site-header .nav-links a { color: rgba(255,255,255,.86); }
 .site-header .nav-links a:hover { color: #fff; }
-/* Logo is an opaque white-ground raster: over the dark hero show it as a rounded white tile;
-   once scrolled onto light, multiply blends its ground away to sit flush on the header. */
-.site-header .brand img { filter: none; mix-blend-mode: normal; border-radius: 9px; box-shadow: 0 6px 22px rgba(0,0,0,.30); }
+/* Logo is an opaque white-ground raster. Keep it as the SAME rounded white tile in both
+   the top and scrolled states — a consistent chip avoids any blend/shape pop while scrolling. */
+.site-header .brand img { filter: none; mix-blend-mode: normal; border-radius: 9px; box-shadow: 0 4px 16px rgba(0,0,0,.20); }
 .site-header .nav-toggle { border-color: rgba(255,255,255,.5); color: #fff; }
 .site-header.scrolled .nav-links a { color: var(--ink-2); }
 .site-header.scrolled .nav-links a:hover { color: var(--ink); }
-.site-header.scrolled .brand img { filter: none; mix-blend-mode: multiply; border-radius: 0; box-shadow: none; }
 .site-header.scrolled .nav-toggle { border-color: var(--silver-2); color: var(--ink); }
 
 /* ---------- Hero ---------- */
