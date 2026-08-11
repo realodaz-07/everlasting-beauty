@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Book an Appointment — Everlasting Beauty Aesthetics | Quezon City</title>
+<meta name="description" content="Book your appointment at Everlasting Beauty Aesthetics — choose your treatments, pick a date and time, and we'll confirm your slot." />
+<meta name="robots" content="index,follow" />
+<link rel="icon" href="assets/img/logo.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="site-header" id="header">
+  <div class="wrap nav">
+    <a class="brand" href="index.html" aria-label="Everlasting Beauty Aesthetics">
+      <img src="assets/img/logo.png" alt="Everlasting Beauty Aesthetics" />
+    </a>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="index.html#treatments">Treatments</a></li>
+        <li><a href="index.html#pricing">Hair Removal</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#results">Reviews</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+      <a href="#book" class="btn sm gold nav-cta">Book Now</a>
+      <button class="icon-btn nav-toggle" id="navToggle" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mm-top">
+    <img src="assets/img/logo.png" alt="" style="height:44px" />
+    <button class="icon-btn" id="navClose" aria-label="Close menu">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <ul>
+    <li><a href="index.html#treatments">Treatments</a></li>
+    <li><a href="index.html#pricing">Hair Removal</a></li>
+    <li><a href="index.html#results">Reviews</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+  <a href="#book" class="btn gold" style="justify-content:center">Book Now · 0917 831 2324</a>
+</div>
+
+<span id="top"></span>
+
+<!-- ================= BOOKING BANNER ================= -->
+<section class="book-hero">
+  <div class="wrap">
+    <p class="book-eyebrow">Reserve your session</p>
+    <h1>Book Your <span class="serif-italic">Appointment</span></h1>
+    <p>Choose your treatments, pick a date and time that suits you, and we’ll confirm your slot by call or text. Beauty that lasts starts here.</p>
+  </div>
+</section>
+
+<!-- ================= BOOKING FORM ================= -->
+<section class="booking" id="book">
+  <div class="wrap">
+    <div class="booking-grid">
+      <!-- FORM -->
+      <div class="book-card" id="bookForm">
+
+        <!-- Step 1: Treatments -->
+        <div class="book-step">
+          <div class="step-label">
+            <span class="step-num">1</span>
+            <h3>Select your treatments</h3>
+            <span class="hint">Choose one or more</span>
+          </div>
+          <div id="treatGroups"></div>
+        </div>
+
+        <!-- Step 2: Date & time -->
+        <div class="book-step">
+          <div class="step-label">
+            <span class="step-num">2</span>
+            <h3>Pick a date &amp; time</h3>
+          </div>
+          <div class="datetime-grid">
+            <div class="cal" id="calendar">
+              <div class="cal-head">
+                <span class="cal-title" id="calTitle">—</span>
+                <span class="cal-nav">
+                  <button type="button" id="calPrev" aria-label="Previous month">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M15 6l-6 6 6 6"/></svg>
+                  </button>
+                  <button type="button" id="calNext" aria-label="Next month">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 6l6 6-6 6"/></svg>
+                  </button>
+                </span>
+              </div>
+              <div class="cal-grid" id="calDow"></div>
+              <div class="cal-grid" id="calDays"></div>
+            </div>
+            <div class="timewrap">
+              <h4 class="time-title">Available times</h4>
+              <div class="time-grid" id="timeGrid"></div>
+              <p class="time-note">Open daily · 10:00 AM – 7:00 PM</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3: Details -->
+        <div class="book-step">
+          <div class="step-label">
+            <span class="step-num">3</span>
+            <h3>Your details</h3>
+          </div>
+          <div class="field two">
+            <div>
+              <label for="fName">Full name</label>
+              <input type="text" id="fName" autocomplete="name" placeholder="Juana Dela Cruz" />
+            </div>
+            <div>
+              <label for="fPhone">Mobile number</label>
+              <input type="tel" id="fPhone" autocomplete="tel" placeholder="0917 000 0000" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="fEmail">Email <span style="text-transform:none;letter-spacing:0;color:var(--silver-2)">(optional)</span></label>
+            <input type="email" id="fEmail" autocomplete="email" placeholder="you@email.com" />
+          </div>
+          <div class="field">
+            <label for="fNotes">Notes <span style="text-transform:none;letter-spacing:0;color:var(--silver-2)">(optional)</span></label>
+            <textarea id="fNotes" placeholder="Anything we should know — skin concerns, preferred aesthetician, etc."></textarea>
+          </div>
+        </div>
+
+        <p class="form-error" id="formError"></p>
+      </div>
+
+      <!-- SUMMARY / CONFIRM -->
+      <aside class="book-summary">
+        <div class="summary-card" id="summaryCard">
+          <h3>Your booking</h3>
+          <div class="sum-list" id="sumTreatments"><p class="sum-empty">No treatments selected yet.</p></div>
+          <div class="sum-row"><span class="k">Date</span><span class="v" id="sumDate">—</span></div>
+          <div class="sum-row"><span class="k">Time</span><span class="v" id="sumTime">—</span></div>
+          <button type="button" class="btn gold book-submit" id="submitBtn">Request Booking <span class="arrow">→</span></button>
+          <p class="book-fineprint">This sends us your requested details — we’ll confirm your exact slot by call or text. No payment required to request.</p>
+        </div>
+
+        <div class="summary-card book-confirm" id="confirmCard">
+          <div class="confirm-ic">
+            <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 13l4 4L20 6"/></svg>
+          </div>
+          <div class="confirm-card">
+            <h3>Almost done!</h3>
+            <p style="color:#c9c5be;font-size:.92rem;margin:0 auto;max-width:34ch">Send your request through any option below and we’ll lock in your slot.</p>
+            <div class="msg-box" id="msgBox"></div>
+            <div class="confirm-actions">
+              <a class="btn gold sm" id="smsBtn" href="#">Send via SMS</a>
+              <a class="btn sm" id="fbBtn" href="https://www.facebook.com/profile.php?id=61553950053744" target="_blank" rel="noopener">Messenger</a>
+              <a class="btn ghost sm" id="callBtn" href="tel:+639178312324" style="color:#fff;border-color:rgba(255,255,255,.4)">Call</a>
+              <button type="button" class="btn ghost sm" id="copyBtn" style="color:#fff;border-color:rgba(255,255,255,.4)">Copy details</button>
+            </div>
+            <button type="button" class="linklike" id="editBtn">← Edit my booking</button>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div class="footer-brand">
+      <div class="wordmark">Everlasting Beauty<small>Aesthetics · Beauty That Lasts</small></div>
+      <p>Advanced skin, laser and permanent hair-removal treatments in Quezon City. Radiant results that last.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Treatments</h4>
+      <ul>
+        <li><a href="index.html#treatments">Extra Glow Facial</a></li>
+        <li><a href="index.html#treatments">Lip Rejuvenation</a></li>
+        <li><a href="index.html#treatments">Underarm Treatment</a></li>
+        <li><a href="index.html#pricing">Hair Removal</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="index.html#about">About Us</a></li>
+        <li><a href="index.html#results">Reviews</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+        <li><a href="booking.html">Book Now</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Get in touch</h4>
+      <ul>
+        <li><a href="tel:+639178312324">0917 831 2324</a></li>
+        <li><a href="https://www.instagram.com/everlastingbeauty.ph" target="_blank" rel="noopener">@everlastingbeauty.ph</a></li>
+        <li><span style="color:#a49f98;">1506 Joshua Jordan Plains,<br/>Quezon City, PH</span></li>
+      </ul>
+      <div class="socials">
+        <a href="https://www.facebook.com/profile.php?id=61553950053744" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h3V6h-3c-2 0-3 1.3-3 3.2V11H9v3h2v7h3v-7h2.5l.5-3H14V9.3c0-.2.2-.3.5-.3z"/></svg></a>
+        <a href="https://www.instagram.com/everlastingbeauty.ph" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+      </div>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">
+    <span>© 2026 Everlasting Beauty Aesthetics. All rights reserved.</span>
+    <span>Crafted by <a href="https://okstudios.dev" target="_blank" rel="noopener">OK Studios</a></span>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+<script src="assets/js/booking.js"></script>
+</body>
+</html>
